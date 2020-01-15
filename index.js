@@ -178,3 +178,206 @@ const burger = new BurgerBuilder();
 burger.addCheeze();
 burger.addTomato();
 console.log(burger.build());
+
+// Adapter
+class Lion {
+    roar(){
+        console.log('Lion roar')
+    }
+}
+
+class Hunter {
+    hunt(lion){
+        lion.roar()
+    }
+}
+
+class WildDog {
+    bark(){
+        console.log('Wild dog bark')
+    }
+}
+
+class DogAdapter{
+    constructor(dog){
+        this.dog = dog;
+    }
+    roar(){
+        this.dog.bark()
+    }
+}
+
+const wildDog = new WildDog();
+
+const wildDogAdapter = new DogAdapter(wildDog);
+
+const hunter = new Hunter();
+
+hunter.hunt(wildDogAdapter);
+
+// Bridge  (Мост)
+
+class Page{
+    constructor(theme){
+        if(new.target === Page){
+            throw new TypeError("Cannot construct Abstract instances directly");
+            return;
+        }
+        this.theme = theme
+    }
+    getContent(){
+        console.log(`${this.content}. Page theme is ${this.theme.getColor()}`)
+    }
+}
+
+class AboutPage extends Page{
+    content = 'About page content'
+}
+
+class ContactPage extends Page{
+    content = 'Contact page content'
+}
+
+class Theme{
+    getColor() {
+        return this.color
+    }
+}
+class DarkTheme extends Theme{
+   color = 'Dark'
+}
+
+class LightTheme extends Theme{
+    color = 'Light'
+}
+
+class AquaTheme extends Theme{
+    color = 'Aqua'
+}
+
+const aboutPage = new AboutPage(new DarkTheme());
+const contactPage = new ContactPage(new LightTheme());
+
+aboutPage.getContent()
+contactPage.getContent()
+
+//Legion task (Компановщик)
+
+class Human {
+    constructor(){
+        if(new.target === Human){
+            throw new TypeError("Human is abstract class");
+            return;
+        }
+    }
+    getStrength(){
+        return this.strength;
+    }
+}
+
+class Archer extends Human {
+    strength = 100;
+}
+
+class Solder extends Human {
+    strength = 200
+}
+
+class Horseman extends Human {
+    strength = 300
+}
+
+class Legion {
+    constructor(){
+        this.arr = []
+    }
+
+    pushLegion(solder){
+        this.arr.push(solder) 
+    }
+    multiPushLegion(solder, count = 1){
+        for(let i = 0; i < count; i++){
+            this.arr.push(solder) 
+        }
+    }
+    getStrength(){
+        let count = 0;
+         this.arr.map((solder) => {
+            count = count + solder.getStrength()
+        })
+        return count
+    }
+}
+
+const legion = new Legion();
+legion.pushLegion(new Archer())
+legion.pushLegion(new Archer())
+legion.pushLegion(new Solder())
+legion.pushLegion(new Solder())
+legion.multiPushLegion(new Solder(), 5)
+console.log(legion.getStrength());
+
+
+// Decarator ( Декаратор )
+
+class Ball {
+    getWidth(){
+        return 200
+    }
+    getMaterial(){
+        return 'I am Ball'
+    }
+}
+class BigBall {
+    constructor(ball){
+        this.ball = ball
+    }
+
+    getWidth(){
+        const { ball } = this;
+        return ball.getWidth() * 1.5
+    }
+
+    getMaterial(){
+        const { ball } = this;
+        return ball.getMaterial()
+    }
+}
+class IronBall {
+    constructor(ball){
+        this.ball = ball
+    }
+
+    getWidth(){
+        const { ball } = this;
+        return ball.getWidth()
+    }
+
+    getMaterial(){
+        const { ball } = this;
+        return ball.getMaterial() + ". My material is Iron"
+    }
+}
+
+const simpleBall = new Ball();
+const bigBall = new BigBall(simpleBall);
+const ironBigBall = new IronBall(bigBall);
+
+console.log(simpleBall.getWidth());
+console.log(bigBall.getWidth());
+console.log(ironBigBall.getMaterial(), 'Width ' + ironBigBall.getWidth());
+
+
+// Fibanachi
+
+function fib(n) {
+    let a = 1;
+    let b = 1;
+    for (let i = 3; i <= n; i++) {
+      let c = a + b;
+      a = b;
+      b = c;
+    }
+    return b;
+  }
+  console.log(fib(4))
