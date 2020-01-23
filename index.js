@@ -315,7 +315,7 @@ legion.pushLegion(new Archer())
 legion.pushLegion(new Solder())
 legion.pushLegion(new Solder())
 legion.multiPushLegion(new Solder(), 5)
-console.log(legion.getStrength());
+console.log("LEGION", legion.getStrength());
 
 
 // Decarator ( Декаратор )
@@ -363,12 +363,13 @@ const simpleBall = new Ball();
 const bigBall = new BigBall(simpleBall);
 const ironBigBall = new IronBall(bigBall);
 
+console.log("Decarator")
 console.log(simpleBall.getWidth());
 console.log(bigBall.getWidth());
 console.log(ironBigBall.getMaterial(), 'Width ' + ironBigBall.getWidth());
+console.log("Decarator (END)")
 
-
-// Fibanachi
+// Exercises
 
 function fib(n) {
     let a = 1;
@@ -381,3 +382,161 @@ function fib(n) {
     return b;
   }
   console.log(fib(4))
+
+
+var foo = {n: 1};
+var bar = foo;
+foo.x = foo = {n: 2};
+
+console.log("Fibanachi", foo)
+
+const testArr = [1,2,3,4,5];
+
+const reverseArr = (arr) => {
+   for(let i = 0; i < arr.length / 2; i++){
+        const num = arr[i];
+        arr[i] = arr[(arr.length - 1) - i]
+        arr[(arr.length - 1) - i] = num
+   }
+   return arr
+}
+
+const reverseString = (str) => {
+    var tmp = "";
+    for (var i = str.length - 1; i >= 0; i--) {
+        tmp += str[i];
+    }
+    return tmp;
+}
+
+console.log("Reverse arr", reverseArr(testArr))
+
+const isPrime = (num) => num > 1 ? num % 2 !== 0 : false;
+
+const factorialFor = (num) => {
+    let locNum = num;
+    for(let i = num; i > 1; i--){
+       locNum = locNum * (i - 1)
+    }
+    return locNum
+}
+
+function factorialReq(n) {
+    return (n !== 1) ? n * factorial(n - 1) : 1;
+}
+
+const isSorted = (arr) => {
+    let i = 0;
+    if(arr.length === 0){
+        return true
+    }
+    while(i < arr.length - 1){
+        if(arr[i] > arr[i + 1]){
+            break;
+        }
+        i++
+    }
+    return i === arr.length - 1
+}
+
+const customFilter = (arr, condition) => {
+      let filtredArr = [];
+      for(let i = 0; i < arr.length - 1; i++){
+          if(condition(arr[i])){
+            filtredArr.push(arr[i])
+          }
+      }
+      return filtredArr;
+}
+
+const customIndexOf = (arr, condition) => {
+    let i = arr.length - 1;
+    while(i !== -1){
+        if(arr[i] === condition){
+            break
+        }
+        i--
+    }
+    return i
+}
+
+function sorte(items) {
+    let tmp, i = 0, j = items.length - 1;
+    let pivot = items[ Math.floor((items.length - 1) / 2) ];
+    console.log(pivot)
+    if (items.length > 1) {
+        while (i <= j) {
+            while (items[i] < pivot) {
+                i++;
+            }
+            while (items[j] > pivot) {
+                j--;
+            }
+            if (i <= j) {
+                tmp = items[i];
+                items[i] = items[j];
+                items[j] = tmp;
+                i++;
+                j--;
+            }
+        }
+    }
+    return items;
+}
+
+console.log('sorte', sorte([-4, 1, Infinity, 3, 3, 0]));
+
+
+var a = {a: 1};
+b = a;
+a.a = 3;
+console.log("Наследование",a, b)
+
+var testZam = 1;
+funcZam()
+function funcZam() {
+ console.log("Замыкание1", testZam);
+ var testZam = 2;
+ console.log("Замыкание2",testZam);
+}
+
+let testZam2 = 1;
+funcZam2()
+function funcZam2() {
+//  console.log("Замыкание3", testZam2); будет ошибка
+ let testZam2 = 2;
+ console.log("Замыкание4",testZam2);
+}
+
+const redXren = {
+    redXren: {
+      name: ''
+    }
+}
+
+const redXren2 = {
+    redXren21: 'some',
+    redXren22: redXren
+}
+console.log('Xren',redXren2)
+
+
+/// Console.log()
+console.log('console test');
+console.log(1);
+setTimeout(()=> console.log('console test (END)'), 0);
+Promise.resolve().then(() => console.log(3));
+console.log(4);
+
+var firstName = 'Igor'
+let user = {
+  firstName: "Vic",
+  sayHi: () => {
+    console.log(`Hello, ${this.firstName}!`);
+  }
+};
+setTimeout(() =>{
+    user.sayHi()
+}, 1000);
+console.log(user)
+
