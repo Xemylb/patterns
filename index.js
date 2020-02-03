@@ -1,3 +1,14 @@
+//SingleTone
+
+const singletone = (function(){
+    const name = 'aaaa';
+    getName = () => name;
+    return {
+        getName
+    }
+}())
+console.log(singletone.name);
+
 // Simple Factory
 class WoodenDoor {
     constructor(width, height){
@@ -246,7 +257,7 @@ class Theme{
 class DarkTheme extends Theme{
    color = 'Dark'
 }
-
+е
 class LightTheme extends Theme{
     color = 'Light'
 }
@@ -295,11 +306,13 @@ class Legion {
     pushLegion(solder){
         this.arr.push(solder) 
     }
+
     multiPushLegion(solder, count = 1){
         for(let i = 0; i < count; i++){
             this.arr.push(solder) 
         }
     }
+    
     getStrength(){
         let count = 0;
          this.arr.map((solder) => {
@@ -383,8 +396,7 @@ function fib(n) {
   }
   console.log(fib(4))
 
-
-var foo = {n: 1};
+  var foo = {n: 1};
 var bar = foo;
 foo.x = foo = {n: 2};
 
@@ -484,59 +496,5 @@ function sorte(items) {
     return items;
 }
 
+
 console.log('sorte', sorte([-4, 1, Infinity, 3, 3, 0]));
-
-
-var a = {a: 1};
-b = a;
-a.a = 3;
-console.log("Наследование",a, b)
-
-var testZam = 1;
-funcZam()
-function funcZam() {
- console.log("Замыкание1", testZam);
- var testZam = 2;
- console.log("Замыкание2",testZam);
-}
-
-let testZam2 = 1;
-funcZam2()
-function funcZam2() {
-//  console.log("Замыкание3", testZam2); будет ошибка
- let testZam2 = 2;
- console.log("Замыкание4",testZam2);
-}
-
-const redXren = {
-    redXren: {
-      name: ''
-    }
-}
-
-const redXren2 = {
-    redXren21: 'some',
-    redXren22: redXren
-}
-console.log('Xren',redXren2)
-
-
-/// Console.log()
-console.log('console test');
-console.log(1);
-setTimeout(()=> console.log('console test (END)'), 0);
-Promise.resolve().then(() => console.log(3));
-console.log(4);
-
-var firstName = 'Igor'
-let user = {
-  firstName: "Vic",
-  sayHi: () => {
-    console.log(`Hello, ${this.firstName}!`);
-  }
-};
-setTimeout(() =>{
-    user.sayHi()
-}, 1000);
-console.log(user)
-
